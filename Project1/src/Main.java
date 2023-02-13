@@ -45,5 +45,20 @@ public class Main {
         return candidates;
     }
 
+    public static void calculateVote(int[] amounts, String[] candidates) {
+/**
+ * simulates a 2 round election based on an array which proceeds with the following:
+ * amounts[0] is numVoters
+ * amount[1] is numCandidates
+ * amount[2] is number of times to run the simulation
+ * as well as a second array of the candidates where:
+ * candidates[n] refers to the nth candidate
+ */
+
+
+        System.out.println();
+        System.out.println(" Two-Round Election with " + amounts[1] + " candidates. ");
+
+
 
 

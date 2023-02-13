@@ -96,5 +96,19 @@ public class Main {
                 secondHighestNum = voteForCandidates[j];
                 highest[1] = candidates[j];
             }
+            System.out.println(candidates[j] + " received " + (100 * ((double) voteForCandidates[j] / amounts[0])) + " % of the vote");
+        }
+        System.out.println((100 * ((double) currentVoters / amounts[0])) + " % of the voters abstained");
+
+
+        for (int k = 0; k < amounts[1]; k++) //see if any candidate won in the first round
+        {
+            if (voteForCandidates[k] > (double) amounts[0] / 2) {
+                System.out.println(candidates[k] + " has won the election with " + (100 * ((double) voteForCandidates[k] / amounts[0])) + " % of the vote ");
+                return;
+            }
+        }
+        
+
 
 

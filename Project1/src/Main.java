@@ -30,6 +30,7 @@ public class Main {
 
         return new int[]{numVoters, numCandidates, numTimes};
     }
+
     public static String[] getCandidates(int numCandidates) {
         String[] candidates;
         candidates = new String[numCandidates];
@@ -37,7 +38,7 @@ public class Main {
 
         for (int i = 0; i < numCandidates; i++) {
             System.out.println(" Enter the name of candidate " + (i + 1) + " : ");
-            if(i == 0) {
+            if (i == 0) {
                 in.nextLine(); //Debug for skipping over first input
             }
             candidates[i] = in.nextLine();
@@ -64,8 +65,6 @@ public class Main {
 
         String[] highest;
         highest = new String[2]; // highest [0] is the highest, highest [1] is the second highest num of voters for a candidate
-
-
 
 
         int highestNum = 0;

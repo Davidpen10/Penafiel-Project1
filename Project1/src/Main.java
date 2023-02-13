@@ -108,7 +108,18 @@ public class Main {
                 return;
             }
         }
-        
+        //second round, which only needs one iteration because there's only two candidates
+        System.out.println(" The highest two that will compete in the second round will be " + highest[0] + " and " + highest[1]);
+        int finalVote = rand.nextInt(amounts[0]);
+        if (finalVote >= amounts[0] / 2) {
+            System.out.println(highest[0] + " has won the election with " + (100 * ((double) finalVote / amounts[0])) + " % of the vote ");
+        } else {
+            System.out.println(highest[1] + " has won the election with " + (100 * ((double) finalVote / amounts[0])) + " % of the vote ");
+        }
+        System.out.println((100 * ((double) (amounts[0] - finalVote) / amounts[0])) + " % of the voters abstained ");
+    }
+}
+
 
 
 

@@ -30,6 +30,20 @@ public class Main {
 
         return new int[]{numVoters, numCandidates, numTimes};
     }
+    public static String[] getCandidates(int numCandidates) {
+        String[] candidates;
+        candidates = new String[numCandidates];
+
+
+        for (int i = 0; i < numCandidates; i++) {
+            System.out.println(" Enter the name of candidate " + (i + 1) + " : ");
+            if(i == 0) {
+                in.nextLine(); //Debug for skipping over first input
+            }
+            candidates[i] = in.nextLine();
+        }
+        return candidates;
+    }
 
 
 

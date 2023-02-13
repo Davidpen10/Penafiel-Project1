@@ -59,6 +59,42 @@ public class Main {
         System.out.println();
         System.out.println(" Two-Round Election with " + amounts[1] + " candidates. ");
 
+        int currentVoters = amounts[0];
 
+
+        String[] highest;
+        highest = new String[2]; // highest [0] is the highest, highest [1] is the second highest num of voters for a candidate
+
+
+
+
+        int highestNum = 0;
+        int secondHighestNum = 0;
+
+
+        int[] voteForCandidates;
+        voteForCandidates = new int[amounts[1]];
+
+
+        for (int i = 0; i < amounts[1]; i++) //assign num votes for each candidate{
+        {
+            voteForCandidates[i] = rand.nextInt(currentVoters);
+            currentVoters -= voteForCandidates[i];
+        }
+
+
+        for (int j = 0; j < amounts[1]; j++) //For every candidate compare their vote to the current highest vote
+        {
+            if (voteForCandidates[j] > highestNum) {
+                highest[1] = highest[0]; //set second highest to previous highest candidate
+                highest[0] = candidates[j]; // set highest to new candidate
+                secondHighestNum = highestNum; // set 2nd highest vote count to previous highest
+                highestNum = voteForCandidates[j]; //set new bar to be met for the if statement
+
+
+            } else if (voteForCandidates[j] > secondHighestNum) {
+                secondHighestNum = voteForCandidates[j];
+                highest[1] = candidates[j];
+            }
 
 

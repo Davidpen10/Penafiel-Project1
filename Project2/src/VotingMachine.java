@@ -44,4 +44,28 @@ public void configure(int numCandidates) {
         return topTwoCandidates;
     }
 
-    
+    /**
+     * Casts a ballot in the voting machine, incrementing the vote count for the preferred candidate
+     * if the ballot is valid (i.e. it contains a mark for only one candidate).
+     *
+     * @param ballot the ballot to cast
+     * @return true if the ballot was cast successfully, false otherwise
+     */
+    public void cast(Ballot ballot) {
+        boolean[] selectedCandidates = ballot.getCandidates();
+        int markedCandidate = -1;
+        for (int i = 0; i < selectedCandidates.length; i++) {
+            if (selectedCandidates[i]) {
+                if (markedCandidate == -1) {
+                    markedCandidate = i;
+                } else {
+                    return; // more than one candidate is marked on the ballot, so the ballot is invalid and not cast
+                }
+            }
+        }
+
+        if (markedCandidate != -1) {
+            voteCounts[markedCandidate]++; // increment the vote count for the marked candidate
+        }
+    }
+

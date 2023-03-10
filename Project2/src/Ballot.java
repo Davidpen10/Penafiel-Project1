@@ -33,3 +33,14 @@ public void mark(int index) {
     public int countCandidates() {
         return candidates.length;
     }
+    /**
+     * Returns a copy of the ballot with all candidates unmarked.
+     *
+     * @return a copy of the ballot with all candidates unmarked
+     */
+    public Ballot clone() {
+        Ballot clone = new Ballot(candidates.length);
+        for (int i = 0; i < candidates.length; i++) {
+            clone.candidates[i] = false;
+        }
+        return clone;

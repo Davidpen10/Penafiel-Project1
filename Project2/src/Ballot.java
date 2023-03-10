@@ -20,3 +20,16 @@ public class Ballot {
  *
  * @param index the index of the candidate to mark
  */
+public void mark(int index) {
+    if (index >= 0 && index < candidates.length) {
+        candidates[index] = true;
+    }
+}
+    /**
+     * Returns the number of candidates on the ballot.
+     *
+     * @return the number of candidates on the ballot
+     */
+    public int countCandidates() {
+        return candidates.length;
+    }

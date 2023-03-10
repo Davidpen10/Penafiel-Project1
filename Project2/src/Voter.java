@@ -1,5 +1,5 @@
 public class Voter {
-}
+
 /**
  * The Voter class represents a voter who can cast a ballot in the voting machine.
  * It contains a vote method that simulates the voting process.

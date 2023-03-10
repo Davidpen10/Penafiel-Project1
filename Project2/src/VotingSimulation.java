@@ -27,3 +27,27 @@ public class VotingSimulation {
         }
        in.close();
     }
+    public static void main(String[] args) {
+        VotingSimulation simulation = new VotingSimulation();
+        simulation.runSimulation();
+    }
+/**
+
+
+ Runs the simulation for a specified number of times, outputting the results of each round of voting.
+
+
+ For each simulation round, creates a new VotingMachine object and a specified number of Voter objects.
+
+
+ Calculates the voting results and prints them to the console.
+
+
+ If a candidate receives more than 50% of the vote in the first round, declares them as the winner.
+
+
+ Otherwise, conducts a runoff election and declares the winner of the runoff.
+
+
+ Prints the winner of each simulation round to the console.
+ */

@@ -15,16 +15,17 @@ public class Ballot {
         candidates = new boolean[numCandidates];
     }
 
-/**
- * Marks the candidate at the given index on the ballot.
- *
- * @param index the index of the candidate to mark
- */
-public void mark(int index) {
-    if (index >= 0 && index < candidates.length) {
-        candidates[index] = true;
+    /**
+     * Marks the candidate at the given index on the ballot.
+     *
+     * @param index the index of the candidate to mark
+     */
+    public void mark(int index) {
+        if (index >= 0 && index < candidates.length) {
+            candidates[index] = true;
+        }
     }
-}
+
     /**
      * Returns the number of candidates on the ballot.
      *
@@ -33,6 +34,7 @@ public void mark(int index) {
     public int countCandidates() {
         return candidates.length;
     }
+
     /**
      * Returns a copy of the ballot with all candidates unmarked.
      *
@@ -44,3 +46,9 @@ public void mark(int index) {
             clone.candidates[i] = false;
         }
         return clone;
+    }
+
+    public boolean[] getCandidates() {
+        return candidates;
+    }
+}

@@ -1,5 +1,5 @@
 public class VotingMachine {
-}
+
     /**
      * The VotingMachine class represents a voting machine that can be used to cast ballots for candidates.
      * It contains a configuredBallot that serves as a template for creating ballots given to voters,
@@ -68,4 +68,37 @@ public void configure(int numCandidates) {
             voteCounts[markedCandidate]++; // increment the vote count for the marked candidate
         }
     }
+    /**
+     * Returns the configured ballot for the voting machine.
+     *
+     * @return the configured ballot for the voting machine
+     */
+    public Ballot getBallot () {
+        return configuredBallot.clone();
+    }
 
+
+    /**
+     * Resets the voting machine by setting all vote counts to zero.
+     */
+    public void reset () {
+        for (int i = 0; i < voteCounts.length; i++) {
+            voteCounts[i] = 0;
+        }
+    }
+
+    /**
+     * Determines the winner of the vote by finding the index of the candidate with the most votes.
+     *
+     * @return the index of the winning candidate
+     */
+    public int determineWinner () {
+        int maxIndex = 0;
+        for (int i = 1; i < voteCounts.length; i++) {
+            if (voteCounts[i] > voteCounts[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+}

@@ -19,4 +19,29 @@ public class VotingMachine {
         configuredBallot = new Ballot(numCandidates);
         voteCounts = new int[numCandidates];
     }
+    public int[] getVoteCounts() {
+        return voteCounts.clone();
+    }
+
+    public int[] getTopTwoCandidates() {
+        int[] voteCounts = this.getVoteCounts();
+        int[] topTwoCandidates = new int[2];
+
+
+        // Initialize the top two candidates to the first two candidates
+        for (int i = 0; i < 2; i++) {
+            topTwoCandidates[i] = i;
+        }
+
+// Find the two candidates with the highest vote counts
+        for (int i = 2; i < voteCounts.length; i++) {
+            if (voteCounts[i] > voteCounts[topTwoCandidates[0]]) {
+                topTwoCandidates[1] = topTwoCandidates[0];
+                topTwoCandidates[0] = i;
+            } else if (voteCounts[i] > voteCounts[topTwoCandidates[1]]) {
+                topTwoCandidates[1] = i;
+            }
+        }
+        return topTwoCandidates;
+    }
     

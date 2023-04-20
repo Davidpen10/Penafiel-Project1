@@ -5,3 +5,31 @@
  */
 public class Ballot {
     boolean[] candidates;
+    /**
+     * Constructs a new ballot with the given number of candidates.
+     *
+     * @param numCandidates the number of candidates on the ballot
+     */
+    public Ballot(int numCandidates) {
+        candidates = new boolean[numCandidates];
+    }
+
+    /**
+     * Marks the candidate at the given index on the ballot.
+     *
+     * @param index the index of the candidate to mark
+     */
+    public void mark(int index) {
+        if (index >= 0 && index < candidates.length) {
+            candidates[index] = true;
+        }
+    }
+
+    /**
+     * Returns the number of candidates on the ballot.
+     *
+     * @return the number of candidates on the ballot
+     */
+    public int countCandidates() {
+        return candidates.length;
+    }

@@ -44,4 +44,64 @@ public class VotingMachine {
         }
         return topTwoCandidates;
     }
-    
+    /**
+     * Casts a ballot in the voting machine, incrementing the vote count for the preferred candidate
+     * if the ballot is valid (i.e. it contains a mark for only one candidate).
+     *
+     * @param ballot the ballot to cast
+     * @return true if the ballot was cast successfully, false otherwise
+     */
+    public void cast(Ballot ballot) {
+        boolean[] selectedCandidates = ballot.getCandidates();
+        int markedCandidate = -1;
+        for (int i = 0; i < selectedCandidates.length; i++) {
+            if (selectedCandidates[i]) {
+                if (markedCandidate == -1) {
+                    markedCandidate = i;
+                } else {
+                    return; // more than one candidate is marked on the ballot, so the ballot is invalid and not cast
+                }
+            }
+        }
+
+        if (markedCandidate != -1) {
+            voteCounts[markedCandidate]++; // increment the vote count for the marked candidate
+        }
+    }
+
+    /**
+     * Returns the configured ballot for the voting machine.
+     *
+     * @return the configured ballot for the voting machine
+     */
+    public Ballot getBallot() {
+        return configuredBallot.clone();
+    }
+
+
+    /**
+     * Resets the voting machine by setting all vote counts to zero.
+     */
+    public void reset() {
+        for (int i = 0; i < voteCounts.length; i++) {
+            voteCounts[i] = 0;
+        }
+    }
+
+    /**
+     * Determines the winner of the vote by finding the index of the candidate with the most votes.
+     *
+     * @return the index of the winning candidate
+     */
+    public int determineWinner() {
+        int maxIndex = 0;
+        for (int i = 1; i < voteCounts.length; i++) {
+            if (voteCounts[i] > voteCounts[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+}
+
+

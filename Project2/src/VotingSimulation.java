@@ -1,7 +1,5 @@
 import java.util.Scanner;
 /**
-
-
  A class that simulates a voting system with a two-round election and a runoff election if needed.
  */
 public class VotingSimulation {
@@ -35,7 +33,6 @@ public class VotingSimulation {
         VotingSimulation simulation = new VotingSimulation();
         simulation.runSimulation();
     }
-
     /**
      * Runs the simulation for a specified number of times, outputting the results of each round of voting.
      * <p>

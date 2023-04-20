@@ -10,3 +10,16 @@ public class OddVoter implements Voter {
 
         // Randomly select an odd index candidate to vote for.
         int preferredCandidate = 0;
+        do {
+            preferredCandidate = (int) (Math.random() * numCandidates);
+        } while (preferredCandidate % 2 != 1);
+
+
+        // Mark the ballot for the preferred candidate.
+        ballot.mark(preferredCandidate);
+
+
+        // Cast the ballot on the voting machine.
+        machine.cast(ballot);
+    }
+}

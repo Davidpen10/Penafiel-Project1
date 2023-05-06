@@ -10,4 +10,25 @@ public class LeadVoter implements Voter {
         int numCandidates = ballot.getCandidates().length;
         //Get vote count for each candidate
         int[] voteCounts = machine.getVoteCounts();
+        //Assume -1 is the highest vote count
+        int highest = -1;
+
+        //Index of the leading a candidate
+        int leadingCandidateIndex = -1;
+
+        for (int i = 0; i < voteCounts.length; i++){
+            if (voteCounts[i] > highest) {
+                highest = voteCounts[i];
+                leadingCandidateIndex = i;
+            }
+        }
+
+        // Mark the ballot for the preferred candidate.
+        ballot.mark(leadingCandidateIndex);
+
+
+        // Cast the ballot on the voting machine.
+        machine.cast(ballot);
+    }
+}
 

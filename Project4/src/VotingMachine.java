@@ -76,3 +76,31 @@ public class VotingMachine {
     public Ballot getBallot() {
         return configuredBallot.clone();
     }
+    /**
+     * Resets the voting machine by setting all vote counts to zero.
+     */
+    public void reset() {
+        for (int i = 0; i < voteCounts.length; i++) {
+            voteCounts[i] = 0;
+        }
+    }
+
+    /**
+     * Determines the winner of the vote by finding the index of the candidate with the most votes.
+     *
+     * @return the index of the winning candidate
+     */
+    public int determineWinner() {
+        int maxIndex = 0;
+        for (int i = 1; i < voteCounts.length; i++) {
+            if (voteCounts[i] > voteCounts[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+}
+
+
+
+

@@ -17,3 +17,14 @@ public class DoubleVoter implements Voter {
             secondPreferredCandidate = (int) (Math.random() * numCandidates);
         } while (secondPreferredCandidate == firstPreferredCandidate);
 
+        // Mark the ballot for the first preferred candidate.
+        ballot.mark(firstPreferredCandidate);
+
+        // Mark the ballot for the second preferred candidate.
+        ballot.mark(secondPreferredCandidate);
+
+
+        // Cast the ballot on the voting machine.
+        machine.cast(ballot);
+    }
+}

@@ -17,6 +17,7 @@ public class VotingSimulation {
     public enum Leanings {
         PARTY_A, PARTY_B, THIRD_PARTY
     }
+
     public VotingSimulation() {
         Scanner in = new Scanner(System.in);
 
@@ -136,3 +137,49 @@ public class VotingSimulation {
                     runoffBallot.mark(k);
                 }
             }
+            for (int j = 0; j < this.partyALoyalVoters; j++) {
+                Voter voter = new LoyalVoter(0);
+                voter.vote(votingMachine);
+            }
+            for (int j = 0; j < this.partyBLoyalVoters; j++) {
+                Voter voter = new LoyalVoter(1);
+                voter.vote(votingMachine);
+            }
+
+            for (int j = 0; j < this.independentVoters; j++) {
+                Voter voter = new IndependentVoter(this.independentLean, this.numCandidates);
+                voter.vote(votingMachine);
+            }
+
+            int[] runoffVoteCounts = votingMachine.getVoteCounts();
+            double runoffAbstainPercent = 100.0 * (double) votingMachine.getBallot().countCandidates() / numVoters;
+            int runoffWinnerIndex = votingMachine.determineWinner();
+            int runoffRunnerUpIndex = (runoffWinnerIndex == winnerIndex) ? runnerUpIndex : winnerIndex;
+            String runoffWinnerParty = "";
+            String runoffRunnerUpParty = "";
+            if (runoffWinnerIndex < 2) {
+                runoffWinnerParty = (runoffWinnerIndex == 0) ? "A" : "B";
+            } else {
+                runoffWinnerParty = "Other";
+            }
+            if (runoffRunnerUpIndex < 2) {
+                runoffRunnerUpParty = (runoffRunnerUpIndex == 0) ? "A" : "B";
+            } else {
+                runoffRunnerUpParty = "Other";
+            }
+
+            System.out.println();
+            System.out.println("Runoff Election with " + runoffBallot.countCandidates() + " candidates.");
+            System.out.println(this.partyAName + " received " + String.format("%.2f", (100.0 * (double) runoffVoteCounts[0] / numVoters)) + " % of the vote");
+            System.out.println(this.partyBName + " received " + String.format("%.2f", (100.0 * (double) runoffVoteCounts[1] / numVoters)) + " % of the vote");
+            System.out.println(otherVotes + " votes were cast for other candidates.");
+            System.out.println(String.format("%.2f", runoffAbstainPercent) + " % of the voters abstained in the runoff election");
+
+            if (runoffVoteCounts[runoffWinnerIndex] > (double) numVoters / 2) {
+                System.out.println("Party " + runoffWinnerParty + " candidate " + " has won the election with " + String.format("%.2f", (100.0 * (double) runoffVoteCounts[runoffWinnerIndex] / numVoters)) + " % of the vote");
+            } else {
+                System.out.println("Party " + runoffWinnerParty + " candidate " + " and Party " + runoffRunnerUpParty + " candidate " + " tied in the runoff with " + String.format("%.2f", (100.0 * (double) runoffVoteCounts[runoffWinnerIndex] / numVoters)) + " % of the vote");
+            }
+        }
+    }
+}

@@ -97,3 +97,42 @@ public class VotingSimulation {
             Voter voter = new IndependentVoter(this.independentLean, this.numCandidates);
             voter.vote(votingMachine);
         }
+        // Calculate and print voting results
+        int numVoters = this.partyALoyalVoters + this.partyBLoyalVoters + this.independentVoters;
+        int[] voteCounts = votingMachine.getVoteCounts();
+        double abstainPercent = 100.0 * (double) votingMachine.getBallot().countCandidates() / numVoters;
+        int otherVotes = numVoters - voteCounts[0] - voteCounts[1];
+        String winnerParty = "";
+        String runnerUpParty = "";
+        int winnerIndex = votingMachine.determineWinner();
+        int runnerUpIndex = (winnerIndex == 0) ? 1 : 0;
+        if (winnerIndex < 2) {
+            winnerParty = (winnerIndex == 0) ? "A" : "B";
+        } else {
+            winnerParty = "Other";
+        }
+        if (runnerUpIndex < 2) {
+            runnerUpParty = (runnerUpIndex == 0) ? "A" : "B";
+        } else {
+            runnerUpParty = "Other";
+        }
+
+        System.out.println();
+        System.out.println("Two-Round Election with " + this.numCandidates + " candidates.");
+        System.out.println(this.partyAName + " received " + String.format("%.2f", (100.0 * (double) voteCounts[0] / numVoters)) + " % of the vote");
+        System.out.println(this.partyBName + " received " + String.format("%.2f", (100.0 * (double) voteCounts[1] / numVoters)) + " % of the vote");
+        System.out.println(otherVotes + " votes were cast for other candidates.");
+        System.out.println(String.format("%.2f", abstainPercent) + " % of the voters abstained");
+
+        if (voteCounts[winnerIndex] > (double) numVoters / 2) {
+            System.out.println("Party " + winnerParty + " candidate " + " has won the election with " + String.format("%.2f", (100.0 * (double) voteCounts[winnerIndex] / numVoters)) + " % of the vote");
+        } else {
+            // reset the voting machine before the second round
+            votingMachine.reset();
+            Ballot runoffBallot = new Ballot(2);
+            runoffBallot.mark(winnerIndex);
+            for (int k = 2; k < this.numCandidates; k++) {
+                if (voteCounts[k] > voteCounts[runoffBallot.getCandidates()[0] ? winnerIndex : k]) {
+                    runoffBallot.mark(k);
+                }
+            }
